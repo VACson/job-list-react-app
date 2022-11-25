@@ -46,11 +46,11 @@ export default function HomeQuery() {
   const { data, isLoading, error } = useQuery(['job'], getJobs);
   if (isLoading) return <h2>Loading</h2>;
   if (error) return <h2>Error</h2>;
-  return <Home data={data}/>
+  return <Home joblist={data}/>
 } 
 
-export function Home({data}: any) {
-  console.log(data);
+export function Home({joblist}: any) {
+  console.log(joblist);
   
   const [currentJobs, setCurrentJobs] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -58,11 +58,11 @@ export function Home({data}: any) {
   const jobsPerPage: number = 15;
   useEffect(() => {
     const endOffset = itemOffset + jobsPerPage;
-    setCurrentJobs(data.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(data.length / jobsPerPage));
-  }, [itemOffset, jobsPerPage, data]);
+    setCurrentJobs(joblist.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(joblist.length / jobsPerPage));
+  }, [itemOffset, jobsPerPage, joblist]);
   const handlePageClick = (event: { selected: number }) => {
-    const newoffset = (event.selected * jobsPerPage) % data.length;
+    const newoffset = (event.selected * jobsPerPage) % joblist.length;
     setItemOffset(newoffset);
   };
   
@@ -131,21 +131,4 @@ export function Home({data}: any) {
     </>
     
   )
-}
-
-export async function getStaticProps() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-    },
-  });
-  const joblist = await res.json();
-
-  return {
-    props: {
-      joblist,
-    },
-  };
 }

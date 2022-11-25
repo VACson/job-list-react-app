@@ -169,20 +169,3 @@ export function Job({joblist}: any) {
     
   )
 }
-// export async function getServerSideProps({params}:any) {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, {
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-//     },
-//   });
-//   const joblist = await res.json();
-
-//   return {
-//     props: {
-//       joblist,
-//     },
-//   };
-// }
-
