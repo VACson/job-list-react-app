@@ -50,6 +50,8 @@ export default function HomeQuery() {
 } 
 
 export function Home({data}: any) {
+  console.log(data);
+  
   const [currentJobs, setCurrentJobs] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -63,8 +65,6 @@ export function Home({data}: any) {
     const newoffset = (event.selected * jobsPerPage) % data.length;
     setItemOffset(newoffset);
   };
-  const id = useLocation()
-  console.log(id);
   
   return (
     <>
