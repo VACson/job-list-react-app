@@ -10,26 +10,9 @@ import GoogleMapBlock from '../components/GoogleMap/GoogleMapBlock';
 import JobDetailDescription from '../components/Description/JobDetailDescription';
 import { Link, useLocation } from 'react-router-dom';
 
-export const getJobs = async () => {
-  return axios
-    .get(`${process.env.REACT_APP_API_URL}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-      },
-    })
-    .then((res) => res.data);
-};
 
-export default function HomeQuery() {
-  const { data, isLoading, error } = useQuery(['job'], getJobs);
-  if (isLoading) return <h2>Loading</h2>;
-  if (error) return <h2>Error</h2>;
-  return <Job joblist={data}/>
-} 
 
-export function Job({joblist}: any) {
+export default function Job({joblist}: any) {
   const router = useLocation(); //useRouter to get id of job
   console.log(router);
    const currentJob = joblist.filter(

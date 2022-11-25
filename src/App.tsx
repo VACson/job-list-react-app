@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import {
   useQueryClient,
@@ -7,19 +7,36 @@ import {
 } from '@tanstack/react-query'
 import JobList from './view/pages/JobList';
 import JobDetailed from './view/pages/JobDetailed';
+import { getJobList } from './api/api';
 
 const queryClient = new QueryClient()
 
 function App() {
+
+  const [list, setList] = useState([]);
+	const [loading, setLoading] = useState<boolean>(false);
   
+  useEffect(() => {
+		getJobList()
+			.then((data) => {
+				console.log(data);
+				setList(data);
+				setLoading(true);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	}, []);
   return (
     <QueryClientProvider client={queryClient}>
-    <Routes>
-    <Route path="/">
-      <Route index element={<JobList />} />
-      <Route path="job/:id" element={<JobDetailed/>} />
-    </Route>
-  </Routes></QueryClientProvider>
+    {loading ? (
+				<Routes>
+					<Route path="/" element={<JobList joblist={list} />} />
+					<Route path="/job/:id" element={<JobDetailed joblist={list} />} />
+				</Routes>
+			) : (
+				<h2>Loading</h2>
+			)}</QueryClientProvider>
   );
 }
 

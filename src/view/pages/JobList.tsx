@@ -30,26 +30,8 @@ interface Job {
   employment_type: [string];
 }
 
-export const getJobs = async () => {
-  return axios
-    .get(`${process.env.REACT_APP_API_URL}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-      },
-    })
-    .then((res) => res.data);
-};
 
-export default function HomeQuery() {
-  const { data, isLoading, error } = useQuery(['job'], getJobs);
-  if (isLoading) return <h2>Loading</h2>;
-  if (error) return <h2>Error</h2>;
-  return <Home joblist={data}/>
-} 
-
-export function Home({joblist}: any) {
+export default function Home({joblist}: any) {
   console.log(joblist);
   
   const [currentJobs, setCurrentJobs] = useState([]);
