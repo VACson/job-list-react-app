@@ -14,7 +14,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 export default function Job({joblist}: any) {
   const router = useLocation(); //useRouter to get id of job
-  console.log(router);
    const currentJob = joblist.filter(
     //get current job object in array
     (job: { id: string | string[] | undefined }) => job.id === router.pathname.substring(5) ,

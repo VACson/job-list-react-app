@@ -32,7 +32,6 @@ interface Job {
 
 
 export default function Home({joblist}: any) {
-  console.log(joblist);
   
   const [currentJobs, setCurrentJobs] = useState([]);
   const [pageCount, setPageCount] = useState(0);

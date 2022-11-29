@@ -19,7 +19,6 @@ function App() {
   useEffect(() => {
 		getJobList()
 			.then((data) => {
-				console.log(data);
 				setList(data);
 				setLoading(true);
 			})

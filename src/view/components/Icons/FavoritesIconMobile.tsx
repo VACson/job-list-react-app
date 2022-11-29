@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 export default function PinIcon({ borderColorDefault }: any) {
-  const [color, setColor] = useState(['white', borderColorDefault]);
+  const [color, setColor] = useState(['none', borderColorDefault]);
   const onClick = () => {
-    color[0] === 'white'
+    color[0] === 'none'
       ? setColor(['#38415D', '#38415D'])
-      : setColor([`white`, borderColorDefault]);
+      : setColor([`none`, borderColorDefault]);
   };
   return (
     <svg
